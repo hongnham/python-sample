@@ -1,22 +1,24 @@
-#import library
-
 import speech_recognition as sr
 
-# Initialize recognizer class (for recognizing the speech)
+recognizer = sr.Recognizer()
 
-r = sr.Recognizer()
-
-# Reading Microphone as source
-# listening the speech and store in audio_text variable
+''' recording the sound '''
 
 with sr.Microphone() as source:
-    print("Talk")
-    audio_text = r.listen(source)
-    print("Time over, thanks")
-# recoginize_() method will throw a request error if the API is unreachable, hence using exception handling
-    
-    try:
-        # using google speech recognition
-        print("Text: "+r.recognize_google(audio_text))
-    except:
-         print("Sorry, I did not get that")
+    print("Start hearing....../n Please speak ")
+    recognizer.adjust_for_ambient_noise(source, duration=1)
+    print("Bat dau nghe ban noi trong 4s")
+    recorded_audio = recognizer.listen(source, timeout=4)
+    print("Da hoan tat viec nghe ban noi")
+
+''' Recorgnizing the Audio '''
+try:
+    print("Chuyen giong noi cua ban thanh van ban")
+    text = recognizer.recognize_google(
+            recorded_audio, 
+            language="en-US"
+        )
+    print("Ban da noi : {}".format(text))
+
+except Exception as ex:
+    print(ex)
