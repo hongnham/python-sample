@@ -1,0 +1,10 @@
+def right_servo_attack(ang):
+    pulse = map(ang, 0, 75, 350, 500)  # map angle of 0 to 180 to Servo min and Servo max
+    return pulse
+
+# In Python, you can use a similar function from the `numpy` library to map values.
+# Make sure to install numpy if you haven't already: pip install numpy
+
+def map(value, in_min, in_max, out_min, out_max):
+    return int((value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+
