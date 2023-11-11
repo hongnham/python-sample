@@ -1,0 +1,51 @@
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+
+#define BALANCE_POSITION 350
+
+// called this way, it uses the default address 0x40
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+#define SERVOMIN  100 // this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  500 // this is the 'maximum' pulse length count (out of 4096)
+
+int leftServoAttack(int ang){
+   int pulse = map(ang, 0, 75, 350, 200);// map angle of 0 to 180 to Servo min and Servo max 
+   return pulse;
+}
+
+
+int rightServoAttack(int ang){
+   int pulse = map(ang, 0, 75, 350, 500);// map angle of 0 to 180 to Servo min and Servo max 
+   return pulse;
+}
+
+// int angleToPulse(int ang){
+//    int pulse = map(ang, 0, 130, SERVOMIN,SERVOMAX);// map angle of 0 to 180 to Servo min and Servo max 
+//    Serial.print("Angle: ");Serial.print(ang);
+//    Serial.print(" pulse: ");Serial.println(pulse);
+//    return pulse;
+// }
+void setHome() {
+  pwm.setPWM(0, 0, BALANCE_POSITION );
+  pwm.setPWM(1, 0, BALANCE_POSITION );
+  pwm.setPWM(2, 0, BALANCE_POSITION );
+  pwm.setPWM(3, 0, BALANCE_POSITION );
+  pwm.setPWM(4, 0, BALANCE_POSITION );
+
+}
+
+void setup() {
+  pwm.begin();
+  pwm.setPWMFreq(50);  // This is the maximum PWM frequency
+  setHome();
+
+}
+
+void loop() {
+//  pwm.setPWM(1, 0, leftServoAttack(30)  );
+//  delay(2000);
+//   pwm.setPWM(1, 0, rightServoAttack(30)  );
+//  delay(2000);
+
+
+}
